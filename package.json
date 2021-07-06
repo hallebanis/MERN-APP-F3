@@ -4,8 +4,19 @@
   "description": "mern app for gomycode's students",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "cd server && nodemon server.js"
   },
   "author": "halleb Anis",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment-timezone": "^0.5.33",
+    "mongoose": "^5.13.2",
+    "nodemon": "^2.0.9"
+  },
+  "devDependencies": {}
 }

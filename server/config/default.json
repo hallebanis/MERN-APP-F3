@@ -1,0 +1,12 @@
+{
+    "DB_CONNECTION":{
+        "URI":"mongodb+srv://user:user@cluster0.wafd6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    },
+    "SERVER_CONFIG":{
+        "PORT":5000
+    },
+    "JWT_CONFIG":{
+        "SECRET":"MYAPP"
+    }
+
+}
