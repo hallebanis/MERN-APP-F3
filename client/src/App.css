@@ -1,0 +1,52 @@
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.navbar {
+  display: "flex";
+  justify-content: "flex-end";
+  gap: "10px";
+  font-size: large;
+  background-color: blanchedalmond;
+  color: black;
+}
+.navbar > * {
+  margin: 5px;
+}
+/* .welcome {
+  margin: 150px 150px;
+  font-size: xx-large;
+} */
+
+.flex-column-center > * {
+  margin: 10px;
+}
+
+.upload {
+  align-self: flex-end;
+  margin: 20px;
+}
+.App-link {
+  color: #61dafb;
+}
+.main-register-container {
+  margin: 100px 400px;
+  background-color: white;
+  opacity: 0.6;
+  border: solid black 2px;
+  border-radius: 20px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

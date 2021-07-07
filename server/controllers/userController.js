@@ -7,7 +7,6 @@ const { validationResult } = require('express-validator')
 const register = async (req, res) => {
     try {
         const errors = validationResult(req)
-        console.log(errors)
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.mapped() })
         const { firstname, lastname, password, email } = req.body
@@ -38,5 +37,38 @@ const register = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty())
+            return res.status(400).json({ errors: errors.mapped() })
+        const { email, password } = req.body;
+        const user = await User.findOne({ email })
+        if (!user)
+            return res.status(404).json({ errors: [{ msg: 'please register before' }] })
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch)
+            return res.status(404).json({ errors: [{ msg: 'wrong password' }] })
+        const payload = {
+            sub: user._id
+        }
+        const token = await jwt.sign(payload, config.get("JWT_CONFIG.SECRET"))
+        res.json({ token })
 
-module.exports = { register }
+    } catch (err) {
+        res.status(500).json({ errors: [{ msg: err.message }] })
+    }
+}
+
+const getUserProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select({ password: 0, _v: 0 })
+        res.json(user)
+    }
+    catch (err) {
+        res.status(500).json({ errors: [{ msg: err.message }] })
+    }
+}
+
+
+module.exports = { register, login, getUserProfile }

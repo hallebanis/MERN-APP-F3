@@ -4,19 +4,24 @@
   "description": "mern app for gomycode's students",
   "main": "server.js",
   "scripts": {
-    "server": "cd server && nodemon server.js"
+    "server": "cd server && nodemon server.js",
+    "client": "cd client && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "halleb Anis",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.0",
     "config": "^3.3.6",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.12.0",
     "jsonwebtoken": "^8.5.1",
     "moment-timezone": "^0.5.33",
-    "mongoose": "^5.13.2",
-    "nodemon": "^2.0.9"
+    "mongoose": "^5.13.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
