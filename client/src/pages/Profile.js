@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 import AddPost from '../component/AddPost'
 import { getPost } from '../redux/actions/postActions'
 import Post from '../component/Post'
+import { Container } from '@material-ui/core'
 
 const Profile = () => {
     const auth = useSelector(state => state.auth)
@@ -14,7 +15,7 @@ const Profile = () => {
         dispatch(getProfile())
         dispatch(getPost())
     }, [])
-    return (<><div>
+    return (<Container maxWidth="sm"><div>
 
         <h1>Profile Page for {auth.user && auth.user.firstname}</h1>
         <AddPost></AddPost>
@@ -23,7 +24,7 @@ const Profile = () => {
         </div>
     </div>
 
-    </>
+    </Container>
     )
 }
 

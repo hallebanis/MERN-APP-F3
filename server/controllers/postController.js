@@ -7,6 +7,7 @@ const { config } = require('../helpers/cloudianry')
 const addPost = async (req, res) => {
     try {
         const { description, image } = req.body
+        console.log(req.body)
         const newPost = new Post({
             description,
             owner: req.userId
@@ -14,7 +15,7 @@ const addPost = async (req, res) => {
         if (image) {
             const savedImage = await cloudinary.uploader.upload(image, {
                 timeout: 60000,
-                upload_preset: config.get("CLOUDINARY_CONFIG.PRESET")
+                upload_preset: "f3-dev"
             })
             console.log(savedImage)
             newPost.image = {
@@ -24,10 +25,9 @@ const addPost = async (req, res) => {
         }
 
         const savedPost = await newPost.save()
-        console.log(savedPost)
         res.json(savedPost)
     } catch (err) {
-        res.status(400).json({ err: err })
+        res.status(400).json({ err: err.message })
     }
 
 
@@ -39,7 +39,7 @@ const getAllPosts = async (req, res) => {
         res.json(posts)
     }
     catch (err) {
-        res.status(400).json({ err: err })
+        res.status(400).json({ err: err.message })
     }
 }
 const getMyPosts = async (req, res) => {
