@@ -11,9 +11,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import {useSelector,useDispatch} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../redux/actions/authActions'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../redux/actions/authActions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ export default function Navbar() {
   const auth = useSelector(state => state.auth.isAuth)
   const dispatch = useDispatch()
 
- 
+
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -53,7 +53,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Photos
+            {!auth && <Link to='/login'>Login</Link>}
           </Typography>
           {auth && (
             <div>
@@ -82,7 +82,7 @@ export default function Navbar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose} ><Link>Profile</Link></MenuItem>
-                <MenuItem onClick={()=>dispatch(logout())}>logout</MenuItem>
+                <MenuItem onClick={() => dispatch(logout())}>logout</MenuItem>
               </Menu>
             </div>
           )}

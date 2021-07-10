@@ -2,6 +2,7 @@ import { GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, LOGIN_FAI
 import axios from 'axios'
 import { prefixe } from "../../helpers/constant"
 import { setToken } from '../../helpers/helpers'
+import { getMyPost } from "./postActions"
 
 
 export const login = (info) => async (dispatch) => {
@@ -29,6 +30,7 @@ export const getProfile = () => async (dispatch) => {
             type: GET_PROFILE_SUCCESS,
             payload: data
         })
+        dispatch(getMyPost())
     }
     catch (err) {
         dispatch({

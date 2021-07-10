@@ -20,11 +20,11 @@ const LoginPage = () => {
             history.push('/profile')
     }, [auth.isAuth])
     return (
-        <form className="flex-column-center" onSubmit={handleSubmit}>
-            <input type="email" placeholder="account@domain.ext" onChange={(e) => setInfo({ ...info, email: e.target.value })}></input>
-            <input type="password" placeholder="*********" onChange={(e) => setInfo({ ...info, password: e.target.value })}></input>
-            <button type="submit" style={{ alignSelf: 'flex-end', color: "black" }}>Submit</button>
-            <button type="reset" style={{ alignSelf: 'flex-end', color: "black" }}>Reset</button>
+        <form style={{ width: "50vw" }} className="flex-column-center" onSubmit={handleSubmit}>
+            <input type="email" style={{ alignSelf: 'center' }} placeholder="account@domain.ext" onChange={(e) => setInfo({ ...info, email: e.target.value })}></input>
+            <input type="password" style={{ alignSelf: 'center' }} placeholder="*********" onChange={(e) => setInfo({ ...info, password: e.target.value })}></input>
+            <button type="submit" style={{ alignSelf: 'center', color: "black" }}>Submit</button>
+            <button type="reset" style={{ alignSelf: 'center', color: "black" }}>Reset</button>
         </form>
     )
 }

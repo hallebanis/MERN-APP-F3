@@ -6,17 +6,20 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Profile from './pages/Profile';
 import Navbar from './component/Navbar'
+import Home from './pages/Home'
+import PrivateRoute from './privateRoutes/PrivateRoute'
 function App() {
 
   return (
     <>
-    
+
       <BrowserRouter>
-      <Navbar></Navbar>
+        <Navbar></Navbar>
         <Switch>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route pah="/profile" component={Profile}></Route>
+          <Route exact path='/' component={Home} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <PrivateRoute exact paht="/profile" component={Profile}></PrivateRoute>
         </Switch>
       </BrowserRouter>
     </>

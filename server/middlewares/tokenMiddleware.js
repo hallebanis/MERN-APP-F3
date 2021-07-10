@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
+const Post = require('../models/Post')
 
 const tokenMiddleware = async (req, res, next) => {
     try {
@@ -15,4 +16,16 @@ const tokenMiddleware = async (req, res, next) => {
     }
 }
 
-module.exports = { tokenMiddleware }
+const checkPostOwner = async (req, res, next) => {
+    try {
+        const post = await Post.findOne({ _id: req.params.id, owner: req.userId })
+        if (!post)
+            return res.status(401).json({ err: 'not authorized !' })
+        next()
+    }
+    catch (err) {
+        return res.status(401).json({ err: err })
+    }
+}
+
+module.exports = { tokenMiddleware, checkPostOwner }

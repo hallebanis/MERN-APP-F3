@@ -1,4 +1,5 @@
 import { GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "../actions/authTypes"
+import { GET_MY_POST_FAILED, GET_MY_POST_REQUEST, GET_MY_POST_SUCCESS } from "../actions/postTypes"
 
 const initState = {
     token: localStorage.getItem('token'),
@@ -10,6 +11,7 @@ const initState = {
 
 const authReducer = (state = initState, { type, payload }) => {
     switch (type) {
+        case GET_MY_POST_REQUEST:
         case GET_PROFILE_REQUEST:
         case LOGIN_REQUEST:
             return {
@@ -41,6 +43,17 @@ const authReducer = (state = initState, { type, payload }) => {
                 user: null,
                 token: null,
             }
+        case GET_MY_POST_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                errors: null,
+                user: {
+                    ...state.user,
+                    posts: payload
+                }
+            }
+        case GET_MY_POST_FAILED:
         case GET_PROFILE_FAILED:
         case LOGIN_FAILED:
             return {

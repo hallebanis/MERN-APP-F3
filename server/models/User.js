@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const moment = require('moment-timezone')
-//const Schema= mongoose.Schema
+const Schema = mongoose.Schema
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
     firstname: String,
     lastname: String,
     email: {
@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
+    },
+    isBanned: {
+        type: Boolean,
+        default: false
     }
 })
 

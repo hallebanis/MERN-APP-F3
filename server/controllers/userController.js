@@ -46,6 +46,9 @@ const login = async (req, res) => {
         const user = await User.findOne({ email })
         if (!user)
             return res.status(404).json({ errors: [{ msg: 'please register before' }] })
+        if (user.isBanned) {
+            return res.status(401).json({ err: "YOU ARE BANNED" })
+        }
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch)
             return res.status(404).json({ errors: [{ msg: 'wrong password' }] })

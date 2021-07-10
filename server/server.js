@@ -6,11 +6,11 @@ const cors = require('cors')
 
 const PORT = config.get('SERVER_CONFIG.PORT') || 5000
 dbConnect()
-console.log('hello7')
 //middlewares
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 app.use('/api/user', require('./routes/userRoutes'))
+app.use('/api/post', require('./routes/postRoutes'))
 
 
 app.listen(PORT, () => {
