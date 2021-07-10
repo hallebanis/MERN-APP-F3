@@ -14,7 +14,6 @@ const AddPost = () => {
     )
     const handleImageChange = (e) => {
         if (e.target.files.length) {
-
             const myImage = e.target.files[0]
             const reader = new FileReader()
             reader.readAsDataURL(myImage)

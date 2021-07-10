@@ -11,7 +11,8 @@
     "CLOUDINARY_CONFIG":{
         "CLOUD_NAME":"dnaxtkqfb",
         "API_KEY":"252434179551881",
-        "API_SECRET":"jtWgcfLJZTnNWa5liDBhLjfdFtA"
+        "API_SECRET":"jtWgcfLJZTnNWa5liDBhLjfdFtA",
+        "PRESET":"f3-dev"
     }
 
 }

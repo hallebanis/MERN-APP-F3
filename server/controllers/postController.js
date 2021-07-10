@@ -1,5 +1,6 @@
 const Post = require('../models/Post')
 const cloudinary = require('../helpers/cloudianry')
+const { config } = require('../helpers/cloudianry')
 
 
 
@@ -13,7 +14,7 @@ const addPost = async (req, res) => {
         if (image) {
             const savedImage = await cloudinary.uploader.upload(image, {
                 timeout: 60000,
-                upload_preset: "f3-dev"
+                upload_preset: config.get("CLOUDINARY_CONFIG.PRESET")
             })
             console.log(savedImage)
             newPost.image = {
