@@ -18,7 +18,7 @@ const userSchema = Schema({
         default: moment(Date.now()).tz('Europe/Paris').format('LLLL')
     },
     image: {
-        type: String
+        type: Schema.Types.Mixed
     },
     role: {
         type: String,

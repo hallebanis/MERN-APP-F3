@@ -1,13 +1,12 @@
 const Post = require('../models/Post')
 const cloudinary = require('../helpers/cloudianry')
-const { config } = require('../helpers/cloudianry')
+
 
 
 
 const addPost = async (req, res) => {
     try {
         const { description, image } = req.body
-        console.log(req.body)
         const newPost = new Post({
             description,
             owner: req.userId
@@ -17,7 +16,6 @@ const addPost = async (req, res) => {
                 timeout: 60000,
                 upload_preset: "f3-dev"
             })
-            console.log(savedImage)
             newPost.image = {
                 url: savedImage.url,
                 public_id: savedImage.public_id
@@ -35,8 +33,27 @@ const addPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find({}).populate('owner')
-        res.json(posts)
+        let limit = +req.query.limit
+        let pageNumber = +req.query.page
+        let documentCount = await Post.find().countDocuments()
+        let numberTotalOfpages = Math.ceil(documentCount / limit);
+
+        /*   if (numberTotalOfpages < documentCount / limit)
+              numberTotalOfpages++ */
+        //out of band verification
+        if (pageNumber > numberTotalOfpages)
+            pageNumber = numberTotalOfpages
+        /* if (pageNumber * limit > documentCount)
+            limit = documentCount - ((pageNumber - 1) * limit) */
+
+        const posts = await Post.find({})
+            .select({ '__v': 0 })
+            .sort({ 'createdAt': -1 })
+            .populate({ path: 'owner', select: "firstname image lastname email _id role " })
+            .skip((pageNumber - 1) * limit)
+            .limit(limit)
+
+        res.json({ posts })
     }
     catch (err) {
         res.status(400).json({ err: err.message })
@@ -58,7 +75,7 @@ const deletePost = async (req, res) => {
         res.json(deletedPost)
     }
     catch (err) {
-        res.status(400).json({ err: err })
+        res.status(400).json({ errors: [{ msg: err.message }] })
     }
 }
 const updatePost = async (req, res) => {
@@ -67,8 +84,19 @@ const updatePost = async (req, res) => {
         res.json(updatedPost)
     }
     catch (err) {
-        res.status(400).json({ err: err })
+        res.status(400).json({ errors: [{ msg: err.message }] })
     }
 }
 
-module.exports = { getAllPosts, getMyPosts, addPost, updatePost, deletePost }
+const getPostsCount = async (req, res) => {
+    try {
+        const count = await Post.find().countDocuments()
+        res.json({ count })
+    }
+    catch (err) {
+        res.status(400).json({ errors: [{ msg: err.message }] })
+
+    }
+}
+
+module.exports = { getAllPosts, getMyPosts, getPostsCount, addPost, updatePost, deletePost }

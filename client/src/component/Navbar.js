@@ -14,6 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../redux/actions/authActions'
+import { Avatar } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  }
 }));
 
 export default function Navbar() {
@@ -32,7 +37,7 @@ export default function Navbar() {
   //const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const auth = useSelector(state => state.auth.isAuth)
+  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
 
@@ -53,9 +58,9 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {!auth && <Link to='/login'>Login</Link>}
+            {!auth.isAuth && <> <Link className="navbar-link" to='/login'>Login</Link><Link className="navbar-link" to='/register'>Register</Link></>}
           </Typography>
-          {auth && (
+          {auth.isAuth && (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -64,7 +69,7 @@ export default function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                {!auth.user ? <AccountCircle /> : <Avatar alt="Remy Sharp" src={auth.user.image.url} className={classes.small} />}
               </IconButton>
               <Menu
                 id="menu-appbar"

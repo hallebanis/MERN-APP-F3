@@ -1,10 +1,10 @@
-const { GET_POST_SUCCESS, GET_POST_FAILED, GET_POST_REQUEST } = require("../actions/postTypes");
+const { GET_POST_SUCCESS, GET_POST_FAILED, GET_POST_REQUEST, GET_POST_COUNT_SUCCESS } = require("../actions/postTypes");
 
 const initState = {
     postList: [],
     errors: null,
-    isLoading: false
-
+    isLoading: false,
+    count: 0
 }
 
 const postReducer = (state = initState, { type, payload }) => {
@@ -12,25 +12,14 @@ const postReducer = (state = initState, { type, payload }) => {
         case GET_POST_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
-                errors: false,
-                postList: payload
+                postList: payload.posts,
+
             }
-        case GET_POST_FAILED:
+        case GET_POST_COUNT_SUCCESS:
             return {
                 ...state,
-                errors: payload,
-                isLoading: false
+                count: payload.count
             }
-        case GET_POST_REQUEST:
-            return {
-                ...state,
-                errors: null,
-                isLoading: true
-            }
-
-
-
         default:
             return state
     }

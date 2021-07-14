@@ -3,13 +3,14 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const { validationResult } = require('express-validator')
+const cloudinary = require('../helpers/cloudianry')
 
 const register = async (req, res) => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.mapped() })
-        const { firstname, lastname, password, email } = req.body
+        const { firstname, lastname, password, email, image } = req.body
         const user = await User.findOne({ email })
         if (user)
             return res.status(400).json({ errors: [{ msg: 'User exist !' }] })
@@ -17,12 +18,22 @@ const register = async (req, res) => {
             firstname,
             lastname,
             password,
-            email
+            email,
         })
         //cryptage du password
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(newUser.password, salt)
         newUser.password = hash
+        if (image) {
+            const savedImage = await cloudinary.uploader.upload(image, {
+                timeout: 60000,
+                upload_preset: "f3-dev"
+            })
+            newUser.image = {
+                url: savedImage.url,
+                public_id: savedImage.public_id
+            }
+        }
 
         const registredUser = await newUser.save()
         const payload = {

@@ -18,6 +18,9 @@
 .navbar > * {
   margin: 5px;
 }
+.navbar-link {
+  margin: 20px;
+}
 /* .welcome {
   margin: 150px 150px;
   font-size: xx-large;

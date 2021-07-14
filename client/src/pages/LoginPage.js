@@ -17,7 +17,7 @@ const LoginPage = () => {
     const history = useHistory()
     useEffect(() => {
         if (auth.isAuth)
-            history.push('/profile')
+            history.push('/')
     }, [auth.isAuth])
     return (
         <form style={{ width: "50vw" }} className="flex-column-center" onSubmit={handleSubmit}>

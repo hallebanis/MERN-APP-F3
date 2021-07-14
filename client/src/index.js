@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css'
 import { Provider } from 'react-redux'
 import store from './redux/store/store';
+import Profile from './pages/Profile';
 
 ReactDOM.render(
   <React.StrictMode>

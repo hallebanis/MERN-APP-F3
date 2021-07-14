@@ -7,9 +7,9 @@ const postSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'user'
     },
-    isValidate:{
-        type:Boolean,
-        default:false
+    isValidate: {
+        type: Boolean,
+        default: false
     },
     createdAt: {
         type: Date,

@@ -84,7 +84,6 @@ const AddPost = () => {
                     Share
                 </Button>
             </form>
-
         </div>
     )
 }

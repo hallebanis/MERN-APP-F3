@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Navbar from './component/Navbar'
 import Home from './pages/Home'
 import PrivateRoute from './privateRoutes/PrivateRoute'
+import LoadingComponent from './component/LoadingComponent';
 function App() {
 
   return (
@@ -15,7 +16,9 @@ function App() {
 
       <BrowserRouter>
         <Navbar></Navbar>
+        <LoadingComponent>  </LoadingComponent>
         <Switch>
+
           <Route exact path='/' component={Home} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />

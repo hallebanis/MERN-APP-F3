@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Avatar } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -20,22 +21,23 @@ export default function Post({ post }) {
     return (
         <Card className={classes.root}>
             <CardActionArea>
-                {post.image && <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="140"
-                    image={post.image.url}
-                    title={'my title'}
-                />}
                 <CardContent>
-
+                    {console.log(post)}
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {post.description}
+                        <Avatar alt="Remy Sharp" src={post.owner.image ? post.owner.image.url : "./images/default.jpg"} />
+                        <span>{`${post.owner.firstname} ${post.owner.lastname} `}</span>
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {post.description}
                     </Typography>
                 </CardContent>
+                {post.image && <CardMedia
+                    component="img"
+                    alt="post image"
+                    style={{ height: 250, width: 400 }}
+                    image={post.image.url}
+                    title={'my title'}
+                />}
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">

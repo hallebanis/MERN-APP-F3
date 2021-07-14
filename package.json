@@ -11,6 +11,7 @@
   "author": "halleb Anis",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.2",
     "concurrently": "^6.2.0",
